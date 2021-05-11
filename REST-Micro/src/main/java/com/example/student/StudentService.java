@@ -15,7 +15,7 @@ public class StudentService extends HibernateUtil {
 
         Student student = (Student) obj;
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = getSessionFactory().openSession();
         // start a transaction
         transaction = session.beginTransaction();
         // save the student objects
@@ -23,6 +23,9 @@ public class StudentService extends HibernateUtil {
         // commit transaction
         transaction.commit();
 
+        session.persist(student);
+        session.flush();
+        session.close();
         return student;
     }
 
@@ -43,7 +46,10 @@ public class StudentService extends HibernateUtil {
         session.update(student);
         // commit transaction
         transaction.commit();
-
+        transaction.commit();
+        session.persist(student);
+        session.flush();
+        session.close();
         System.out.println("the Prof is update  " + student.getName());
         return student;
 
@@ -59,6 +65,9 @@ public class StudentService extends HibernateUtil {
         student = session.byId(Student.class).getReference(imma);
         // commit transaction
         transaction.commit();
+        session.persist(student);
+        session.flush();
+        session.close();
 
         return student;
     }
@@ -77,6 +86,10 @@ public class StudentService extends HibernateUtil {
         session.delete(student);
         // commit transaction
         transaction.commit();
+
+        session.persist(student);
+        session.flush();
+        session.close();
         return student;
     }
 
@@ -90,7 +103,9 @@ public class StudentService extends HibernateUtil {
         // save the student objects
         students = session.createCriteria(Student.class).list();
         transaction.commit();
-
+        session.persist(students);
+        session.flush();
+        session.close();
         return students;
     }
 

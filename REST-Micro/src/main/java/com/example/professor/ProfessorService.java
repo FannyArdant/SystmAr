@@ -24,6 +24,10 @@ public class ProfessorService extends HibernateUtil {
         session.save(professor);
             // commit transaction
         transaction.commit();
+
+        session.persist(professor);
+        session.flush();
+        session.close();
         return professor;
     }
 
@@ -46,6 +50,9 @@ public class ProfessorService extends HibernateUtil {
             // commit transaction
         transaction.commit();
 
+        session.persist(professor);
+        session.flush();
+        session.close();
         System.out.println("the Prof is update  " + professor.getName());
         return professor;
 
@@ -63,6 +70,9 @@ public class ProfessorService extends HibernateUtil {
             // commit transaction
         transaction.commit();
 
+        session.persist(professor);
+        session.flush();
+        session.close();
         return professor;
     }
 
@@ -80,6 +90,10 @@ public class ProfessorService extends HibernateUtil {
         session.delete(professor);
             // commit transaction
         transaction.commit();
+
+        session.persist(professor);
+        session.flush();
+        session.close();
         return professor;
     }
 
